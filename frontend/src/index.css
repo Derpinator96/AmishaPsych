@@ -1,0 +1,30 @@
+:root {
+  /* YOUR COLOR PALETTE */
+  --bg-cream: #EAE3CE;        /* Main background */
+  --tiger-orange: #EF8603;    /* Highlight 1 */
+  --burnt-tangerine: #E12D12; /* Highlight 2 (Darker Red-Orange) */
+  --laser-blue: #0E5BDF;      /* Highlight 3 (Vibrant Blue) */
+  --jasmine: #FFE88E;         /* Highlight 4 (Soft Yellow) */
+  
+  --text-dark: #1a1a1a;       /* Dark text for reading */
+  --text-light: #EAE3CE;      /* Light text on dark backgrounds */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-dark);
+  font-family: 'Inter', sans-serif; /* Fallback until you add Ozik */
+  padding: 2rem;
+}
+
+/* Make images fluid */
+img {
+  max-width: 100%;
+  display: block;
+}

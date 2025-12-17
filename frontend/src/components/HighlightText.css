@@ -1,0 +1,11 @@
+/* src/components/HighlightText.css */
+.chunky-highlight {
+  color: var(--text-main); /* The cream color text */
+  padding: 0px 10px;       /* Tight padding like the image */
+  font-family: 'Ozik', sans-serif;
+  font-weight: bold;
+  font-size: 3rem;         /* Big and bold */
+  line-height: 1.1;        /* Squeeze lines together */
+  display: inline-block;   /* Allows the box to wrap tightly */
+  transform: rotate(-2deg); /* A tiny tilt for playfulness */
+}
