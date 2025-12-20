@@ -10,6 +10,36 @@
   margin: 0 auto;
 }
 
+/* frontend/src/App.css */
+
+.cursor-trail-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  
+  /* Puts it ON TOP of everything (Navbar, text, images) */
+  z-index: 9999; 
+  
+  /* CRITICAL: Allows you to click buttons underneath the trail */
+  pointer-events: none !important; 
+  
+  /* Ensure the container background is transparent */
+  background: transparent; 
+}
+
+
+/* Add this to ensure the internal canvas also ignores clicks */
+.cursor-trail-overlay * {
+  pointer-events: none !important;
+}
+
+.content-layer {
+  position: relative;
+  z-index: 1; 
+}
+
 /* THE BOXES (Shared Styles) */
 .bento-box {
   background-color: white;

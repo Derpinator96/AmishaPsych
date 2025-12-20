@@ -1,0 +1,20 @@
+/* frontend/src/components/PixelTrail.css */
+
+.goo-filter-container {
+  position: absolute;
+  overflow: hidden;
+  z-index: 1;
+  /* ADD THESE: Ensures the filter covers the whole wrapper */
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Safety check to allow clicks through */
+}
+
+.pixel-canvas {
+  position: absolute;
+  z-index: 1;
+  /* ADD THESE: Ensures the canvas fills the wrapper */
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* CRITICAL: Lets clicks pass through the actual drawing */
+}
