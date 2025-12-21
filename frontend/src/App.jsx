@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Amisha from './assets/amishahero.jpeg' 
+import Amisha from './assets/newhero.jpeg' 
 import PixelTrail from './components/PixelTrail.jsx'
 
 function App() {
-  const [hoveredBox, setHoveredBox] = useState(null);
+  const [expandedBox, setExpandedBox] = useState(null);
+
+  const handleBoxClick = (id) => {
+    setExpandedBox(prev => prev === id ? null : id);
+  };
 
   const getBoxClasses = (id, defaultClasses) => {
-    if (hoveredBox === id) {
+    if (expandedBox === id) {
       if (id === 'hero') return 'bento-box col-span-4 row-span-2 bg-blue';
       if (id === 'education') return 'bento-box align-top col-span-2 row-span-2 bg-white';
     }
     return defaultClasses;
   };
 
-  const isHeroHovered = hoveredBox === 'hero';
+  const isHeroExpanded = expandedBox === 'hero';
 
   return (
     <>
@@ -44,7 +48,6 @@ function App() {
         /* --- BENTO GRID --- */
         .bento-container {
           display: grid; 
-          grid-auto-flow: dense; 
           grid-template-columns: repeat(4, 1fr); 
           gap: 1.5rem; 
           max-width: 1200px; 
@@ -61,6 +64,7 @@ function App() {
           overflow: hidden;
           transform-origin: center center;
           position: relative; 
+          user-select: none;
         }
         
         .bento-box:hover { z-index: 20; box-shadow: 10px 10px 0 rgba(0,0,0,0.1); }
@@ -85,7 +89,6 @@ function App() {
           object-fit: cover; 
           border-radius: 20px; 
           border: 4px solid var(--text-light); 
-          /* Margin handles are done in inline styles now for layout shifting */
         }
         
         .skill-tag { 
@@ -121,11 +124,10 @@ function App() {
       <div className="portfolio-wrapper">
         <motion.div className="bento-container" layout>
           
-          {/* 1. HERO BLOCK */}
+          {/* 1. HERO BLOCK (Click to Expand) */}
           <motion.div 
             layout 
-            onMouseEnter={() => setHoveredBox('hero')}
-            onMouseLeave={() => setHoveredBox(null)}
+            onClick={() => handleBoxClick('hero')}
             className={getBoxClasses('hero', "bento-box col-span-2 row-span-2 bg-blue")}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
@@ -133,18 +135,16 @@ function App() {
               Open to Work
             </motion.div>
             
-            {/* Header always stays at top */}
             <motion.div layout="position">
               <h3>Aspiring Clinical Psychologist</h3>
               <h1 className="hero-title">Amisha Verma</h1>
             </motion.div>
 
-            {/* Content Container: Switches from Column to Row on hover */}
             <motion.div 
               layout 
               style={{ 
                 display: 'flex', 
-                flexDirection: isHeroHovered ? 'row' : 'column', // SWITCH LAYOUT
+                flexDirection: isHeroExpanded ? 'row' : 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '2rem',
@@ -152,15 +152,12 @@ function App() {
                 height: '100%'
               }}
             >
-              {/* Image */}
               <motion.div layout="position" className="heroImage">
-                <img src={Amisha} alt="Amisha" style={{ width: isHeroHovered ? '280px' : '' }} />
+                <img src={Amisha} alt="Amisha" style={{ width: isHeroExpanded ? '280px' : '' }} />
               </motion.div>
               
-              {/* Dynamic Text Area */}
               <AnimatePresence mode="wait">
-                {isHeroHovered ? (
-                  /* HOVER TEXT: Big, to the right */
+                {isHeroExpanded ? (
                   <motion.div 
                     key="big-text"
                     initial={{ opacity: 0, x: 20 }}
@@ -174,7 +171,6 @@ function App() {
                     </p>
                   </motion.div>
                 ) : (
-                  /* DEFAULT TEXT: Small, at the bottom */
                   <motion.div 
                     key="small-text"
                     layout="position"
@@ -192,11 +188,10 @@ function App() {
             </motion.div>
           </motion.div>
 
-          {/* 2. EDUCATION BLOCK */}
+          {/* 2. EDUCATION BLOCK (Click to Expand) */}
           <motion.div 
             layout
-            onMouseEnter={() => setHoveredBox('education')}
-            onMouseLeave={() => setHoveredBox(null)}
+            onClick={() => handleBoxClick('education')}
             className={getBoxClasses('education', "bento-box align-top row-span-2 bg-white")}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
@@ -215,7 +210,7 @@ function App() {
             </motion.div>
           </motion.div>
 
-          {/* 3. CONTACT BLOCK */}
+          {/* 3. CONTACT BLOCK (Static) */}
           <motion.div 
             layout
             className="bento-box bg-orange"
@@ -225,7 +220,7 @@ function App() {
              <motion.a href="mailto:amisha.verma2112@gmail.com" className="contact-link" layout="position">Email Me</motion.a>
           </motion.div>
 
-          {/* 4. LEADERSHIP BLOCK */}
+          {/* 4. LEADERSHIP BLOCK (REVERTED: Moved back to 4th spot) */}
           <motion.div 
             layout
             className="bento-box bg-orange"
@@ -238,7 +233,7 @@ function App() {
              </motion.div>
           </motion.div>
 
-          {/* 5. SKILLS BLOCK */}
+          {/* 5. CORE COMPETENCIES (REVERTED: Moved back to 5th spot) */}
           <motion.div 
             layout
             className="bento-box col-span-2 bg-red"
