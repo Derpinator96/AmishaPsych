@@ -49,7 +49,7 @@ export default function HeroBox({ isExpanded, onClick, isMobile }) {
         </motion.div>
         
         <AnimatePresence mode="wait">
-          {expanded ? (
+          {expanded || isMobile ? (
             <motion.div 
               key="big-text"
               initial={{ opacity: 0, x: 20 }}
@@ -57,7 +57,7 @@ export default function HeroBox({ isExpanded, onClick, isMobile }) {
               exit={{ opacity: 0 }}
               style={{ flex: 1 }}
             >
-              <p style={{ fontSize: '1.4rem', fontWeight: '500', lineHeight: '1.5' }}>
+              <p style={{ fontSize: isMobile ? '1.1rem' : '1.4rem', fontWeight: '500', lineHeight: '1.5' }}>
                 Experienced in clinical settings, psychometric assessments, and mental health awareness initiatives. 
                 Strong background in research, volunteering, and teamwork, with a passion for serving underprivileged communities.
               </p>

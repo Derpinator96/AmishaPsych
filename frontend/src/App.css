@@ -167,11 +167,12 @@
   }
 
   .bento-box h1.hero-title {
-    font-size: 2.5rem; /* smaller text */
+    font-size: 2.2rem; /* smaller text */
+    word-break: break-word; /* ensure long names don't spill */
   }
 
   .bento-box h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
   
   .badge {
@@ -179,5 +180,8 @@
     top: auto; right: auto;
     display: inline-block;
     margin-bottom: 1rem;
+    transform: none !important; /* cancel rotation */
+    width: auto;
+    align-self: flex-start;
   }
 }
