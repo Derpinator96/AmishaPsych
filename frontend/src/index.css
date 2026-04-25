@@ -1,27 +1,26 @@
 :root {
-  /* YOUR COLOR PALETTE */
-  --bg-cream: #EAE3CE;        /* Main background */
-  --tiger-orange: #EF8603;    /* Highlight 1 */
-  --burnt-tangerine: #E12D12; /* Highlight 2 (Darker Red-Orange) */
-  --laser-blue: #0E5BDF;      /* Highlight 3 (Vibrant Blue) */
-  --jasmine: #FFE88E;         /* Highlight 4 (Soft Yellow) */
+  /* DARK PASTEL BENTO PALETTE */
+  --bg-dark: #1A1C1A;           /* Main background */
+  --box-lime: #D0FF5B;          /* Lime green box */
+  --box-purple: #DCD6FA;        /* Pale purple box */
+  --box-white: #FFFFFF;         /* White box */
+  --box-dark: #2C2C2C;          /* Secondary dark box */
   
-  --text-dark: #1a1a1a;       /* Dark text for reading */
-  --text-light: #EAE3CE;      /* Light text on dark backgrounds */
+  --text-dark: #121212;         /* Dark text for light boxes */
+  --text-light: #F8F9FA;        /* Light text on dark bg/boxes */
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  
 }
 
 body {
-  background-color: var(--bg-cream);
-  color: var(--text-dark);
-  font-family: 'Inter', sans-serif; /* Fallback until you add Ozik */
-  padding: 2rem;
+  background-color: var(--bg-dark);
+  color: var(--text-light); /* Since bg is dark */
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
 }
 
 /* Make images fluid */

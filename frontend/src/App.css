@@ -1,3 +1,11 @@
+/* --- WRAPPER --- */
+.portfolio-wrapper {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
 /* The Main Container */
 .bento-container {
   display: grid;
@@ -10,27 +18,17 @@
   margin: 0 auto;
 }
 
-/* frontend/src/App.css */
-
 .cursor-trail-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  
-  /* Puts it ON TOP of everything (Navbar, text, images) */
   z-index: 9999; 
-  
-  /* CRITICAL: Allows you to click buttons underneath the trail */
   pointer-events: none !important; 
-  
-  /* Ensure the container background is transparent */
   background: transparent; 
 }
 
-
-/* Add this to ensure the internal canvas also ignores clicks */
 .cursor-trail-overlay * {
   pointer-events: none !important;
 }
@@ -42,81 +40,144 @@
 
 /* THE BOXES (Shared Styles) */
 .bento-box {
-  background-color: white;
-  border-radius: 24px; /* Soft, playful corners */
-  padding: 1.5rem;
+  background-color: var(--box-white);
+  color: var(--text-dark);
+  border-radius: 32px; /* Smoother, larger border radius resembling the mockup */
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 2px solid transparent; /* invisible border usually */
+  border: none;
+  overflow: hidden;
+  position: relative; 
+  /* DO NOT set transition: transform here; it breaks Framer Motion */
 }
 
-/* Hover Effect: Pop up slightly */
-.bento-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 10px 10px 0px rgba(0,0,0,0.1); /* Hard shadow for "pop" feel */
-}
+/* COLOR VARIANTS */
+.bg-lime { background-color: var(--box-lime); color: var(--text-dark); }
+.bg-purple { background-color: var(--box-purple); color: var(--text-dark); }
+.bg-dark { background-color: var(--box-dark); color: var(--text-light); }
+.bg-white { background-color: var(--box-white); color: var(--text-dark); }
 
-/* SIZING UTILITIES - Making boxes different sizes */
+/* SIZING UTILITIES */
+.align-top { justify-content: flex-start !important; gap: 2rem; }
 .col-span-2 { grid-column: span 2; }
 .col-span-3 { grid-column: span 3; }
+.col-span-4 { grid-column: span 4; }
 .row-span-2 { grid-row: span 2; }
+.row-span-3 { grid-row: span 3; }
 
-/* COLOR VARIANTS - We use these in React */
-.bg-orange { background-color: var(--tiger-orange); color: var(--text-light); }
-.bg-blue   { background-color: var(--laser-blue); color: var(--text-light); }
-.bg-red    { background-color: var(--burnt-tangerine); color: var(--text-light); }
-.bg-white  { background-color: white; border: 2px solid var(--text-dark); }
+/* TYPOGRAPHY OVERRIDES */
+.bento-box h1.hero-title {
+  font-size: 3.5rem; 
+  font-weight: 800; 
+  line-height: 1.1; 
+  margin-top: 0.5rem;
+  letter-spacing: -0.03em;
+}
 
-/* Typography inside boxes */
 .bento-box h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 800;
   margin-bottom: 0.5rem;
   line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .bento-box h3 {
-  font-size: 1.1rem;
-  opacity: 0.9;
+  font-size: 1rem;
+  opacity: 0.8;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .bento-box p {
-  font-size: 0.95rem;
-  line-height: 1.4;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin-top: 0.5rem;
 }
 
 /* Specific Component Styles */
+.heroImage img { 
+  width: clamp(150px, 100%, 350px); 
+  aspect-ratio: 4/5; 
+  object-fit: cover; 
+  border-radius: 20px; 
+}
+
 .skill-tag {
   display: inline-block;
-  background: rgba(255,255,255, 0.2);
-  padding: 4px 12px;
+  background: rgba(0,0,0, 0.08);
+  padding: 6px 14px;
   border-radius: 20px;
   margin: 4px;
   font-size: 0.85rem;
-  backdrop-filter: blur(5px);
+  font-weight: 600;
+}
+.bg-dark .skill-tag {
+  background: rgba(255,255,255, 0.1);
 }
 
-.job-item {
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+.contact-link { 
+  color: inherit; 
+  text-decoration: underline; 
+  font-size: 1.2rem; 
+  font-weight: 700; 
+  margin-top: auto; 
+  display: inline-block; 
 }
 
-/* MOBILE: Collapse to 1 column on small screens */
+/* BADGE */
+.badge {
+  position: absolute; 
+  top: 1.5rem; 
+  right: 1.5rem; 
+  background: var(--text-dark); 
+  color: var(--text-light); 
+  padding: 8px 16px; 
+  border-radius: 20px; 
+  font-weight: 700; 
+  font-size: 0.85rem;
+  white-space: nowrap; 
+  z-index: 30;
+}
+
+/* MOBILE RESPONSIVE TWEAKS */
 @media (max-width: 768px) {
+  .portfolio-wrapper {
+    padding: 1rem;
+  }
+  
   .bento-container {
     grid-template-columns: 1fr; /* Force 1 column */
     grid-auto-rows: auto;
+    gap: 1rem;
   }
   
   /* Reset spans on mobile so everything stacks */
-  .col-span-2, .col-span-3, .row-span-2 {
+  .col-span-2, .col-span-3, .col-span-4, .row-span-2, .row-span-3 {
     grid-column: auto;
     grid-row: auto;
+  }
+
+  .bento-box {
+    padding: 1.5rem; /* slightly less padding on mobile */
+    border-radius: 24px;
+  }
+
+  .bento-box h1.hero-title {
+    font-size: 2.5rem; /* smaller text */
+  }
+
+  .bento-box h2 {
+    font-size: 1.5rem;
+  }
+  
+  .badge {
+    position: relative; /* On mobile, move badge into flow so it doesn't overlap title */
+    top: auto; right: auto;
+    display: inline-block;
+    margin-bottom: 1rem;
   }
 }
